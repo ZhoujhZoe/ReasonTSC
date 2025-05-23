@@ -1,6 +1,8 @@
 # ReasonTSC
 A novel framework designed to effectively leverage LLM reasoning for time series classification through both a multi-turn reasoning and a fused decision-making strategy tailored to TSC.
 
+The code for ReasonTSC is available at https://anonymous.4open.science/r/ReasonTSC-B737.
+
 ## Installation
 To set up the environment, run:
 ```bash
@@ -77,19 +79,7 @@ python analyze_results.py --input output.json
 ```
 
 ## Interpretation
-### Synthetic data interpretation
-Process the generated data into comparison format:
-```bash
-python -m data_generation.utils process_jsonl input.jsonl output.json
-```
-Evaluate samples using GPT-4:
-```bash
-from evaluation.llm_evaluator import LLMEvaluator, EvaluationConfig
-config = EvaluationConfig(model="gpt-4")
-evaluator = LLMEvaluator(config)
-results = evaluator.evaluate_samples("synthesis_pattern.json", "pattern")
-```
-### UCR & UEA data interpretation
+UCR & UEA data interpretation
 ```bash
 python analyze.py \
     --config ./multi_prompt_UEA.json \
