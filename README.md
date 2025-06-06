@@ -1,7 +1,7 @@
 # ReasonTSC
 A framework designed to effectively leverage LLM reasoning for time series classification through both a multi-turn reasoning and a fused decision-making strategy tailored to TSC.
 
-The code for ReasonTSC is available at https://anonymous.4open.science/r/ReasonTSC-B737.
+We have published our paper on arXiv: https://arxiv.org/pdf/2506.00807. The complete code for ReasonTSC is currently under optimization, and we will release the updated version soon.
 
 ## Installation
 To set up the environment, run:
