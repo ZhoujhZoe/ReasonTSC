@@ -35,8 +35,7 @@ The resulting JSON structure
         "label": 10,
         "predicted": 10,
         "logits": "[8.3, 3.76, 6.21, 3.73, 0.69, 2.73, 0.7, 1.71, 7.29, 9.32]"
-    },
-    ...
+    }
 ]
 ```
 
