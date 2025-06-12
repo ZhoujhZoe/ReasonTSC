@@ -1,16 +1,43 @@
 # ReasonTSC
-A framework designed to effectively leverage LLM reasoning for time series classification through both a multi-turn reasoning and a fused decision-making strategy tailored to TSC.
+ReasonTSC is a framework designed to effectively leverage LLM reasoning for time series classification through both a multi-turn reasoning and a fused decision-making strategy tailored to TSC.
 
-We have published our paper on arXiv: https://arxiv.org/pdf/2506.00807. The complete code for ReasonTSC is currently under optimization, and we will release the updated version soon.
+Our work is detailed in the paper *"Enhancing LLM Reasoning for Time Series Classification by Tailored Thinking and Fused Decision"* available on [arXiv](https://arxiv.org/pdf/2506.00807). The complete code for ReasonTSC is currently under optimization, and we will release the updated version soon.
 
-## Installation
-To set up the environment, run:
+To set up the environment
 ```bash
 pip install -r requirements.txt
 ```
-Configure your OpenAI API key:
+
+## Data Preparation
+### Dataset Source
+We benchmark ReasonTSC using the [UCR/UEA Time Series Classification Archive](https://www.timeseriesclassification.com/), a standard dataset collection for evaluating classification algorithms. It covers diverse scenarios with varying numbers of classes.
+
+### Dataset processing
+- The raw dataset is provided in `.ts` format. We convert the time series data from `.ts` to `JSON` for further processing. 
+- Since time series samples often have long sequence lengths and LLMs are insensitive to high-precision decimals, we truncate values to `three decimal places` to optimize context window usage.
+- We use the `first dimension` of the multivariate UEA datasets to address the token limit restrictions imposed by LLM input queries.
 ```bash
-export OPENAI_API_KEY="your_api_key_here"
+cd ./Data
+python process_dataset.py
+```
+
+### TSFM output processing
+The raw classification results (including predictions and per-category logits) of TSFMs are in the `.txt` format, we also convert it to `JSON` for ReasonTSC. 
+```bash
+cd ./Data
+python process_TSFM.py
+```
+The resulting JSON structure
+```json
+[
+    {
+        "id": 0,
+        "label": 10,
+        "predicted": 10,
+        "logits": "[8.3, 3.76, 6.21, 3.73, 0.69, 2.73, 0.7, 1.71, 7.29, 9.32]"
+    },
+    ...
+]
 ```
 
 ## Time Series Foundation Models (TSFMs)
@@ -39,24 +66,6 @@ python MOMENT_fullfinetune.py \
     --model_path "./path/to/MOMENT" \
     --output_file "./MOMENT_output.txt" \
     --epochs 20
-```
-
-## Dataset Preparation
-### Dataset Sources
-Download UCR/UEA datasets from: 
-https://www.timeseriesclassification.com/ 
-### Data Processing
-Convert time series data from .ts format to JSON:
-```bash
-python process_dataset.py \
-        --ts_file ./EpilepsyDimension1_TEST.ts \
-        --json_file ./EpilepsyDimension1_TEST.json
-```
-Convert TSFM model output to JSON:
-```bash
-python process_TSFM.py \
-    --txt_file ./raw_output/Chronos_EpilepsyDimension1.txt \
-    --json_file ./processed_output/Chronos_EpilepsyDimension1.json
 ```
 
 ## Running ReasonTSC
