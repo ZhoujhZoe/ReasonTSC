@@ -40,9 +40,26 @@ The resulting JSON structure
 ```
 
 ## Time Series Foundation Models (TSFMs)
-Model Options
-* MOMENT time series foundation model: https://github.com/moment-timeseries-foundation-model/moment
-* Chronos Forecasting Model for Embedding: https://github.com/amazon-science/chronos-forecasting
+We select two prominent time series foundation models as the plug-in classifiers: 
+- [MOMENT](https://github.com/moment-timeseries-foundation-model/moment). An encoder-only T5-based model, fully fine-tuned per task.
+
+  Model used: [MOMENT-1-large](https://huggingface.co/AutonLab/MOMENT-1-large) (341M).
+- [Chronos](https://github.com/amazon-science/chronos-forecasting). An encoder-decoder model originally for forecasting; we adapt its pretrained encoder to extract embeddings for an SVM classifier.
+  
+   Model used: [chronos-t5-large](https://huggingface.co/amazon/chronos-t5-large).
+- ReasonTSC can effectively leverage LLMs' understanding of time series patterns through multi-turn reasoning to correct incorrect predictions by plug-in models. The framework is extensible to other TSFMs.
+
+### Fine-tuning MOMENT for classification
+```bash
+cd ./TSFM
+python MOMENT_fullfinetune.py \
+    --num-class 5 \
+    --epochs 20 \
+    --output-file ./results.txt \
+    --model-path /path/to/MOMENT
+```
+
+
 ### Using Chronos Embeddings with SVM
 ```bash
 python chronos_embeddings.py \
@@ -58,14 +75,7 @@ Arguments:
 * --batch_size: Batch size for embedding generation (default: 1)
 * --pooling: Embedding pooling strategy - 'mean' or 'first' (default: mean)
 
-### Fine-tuning MOMENT for classification
-```bash
-python MOMENT_fullfinetune.py \
-    --num_class 5 \
-    --model_path "./path/to/MOMENT" \
-    --output_file "./MOMENT_output.txt" \
-    --epochs 20
-```
+
 
 ## Running ReasonTSC
 ```bash
