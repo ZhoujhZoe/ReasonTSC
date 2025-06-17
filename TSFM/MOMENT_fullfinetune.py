@@ -7,7 +7,6 @@ from pprint import pprint
 import torch
 from tqdm import tqdm
 import numpy as np
-from statistical_classifiers import fit_svm
 import random
 import os
 import argparse

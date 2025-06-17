@@ -59,23 +59,15 @@ python MOMENT_fullfinetune.py \
     --model-path /path/to/MOMENT
 ```
 
-
-### Using Chronos Embeddings with SVM
+### Training an SVM-based classifier with Pre-trained Chronos Embeddings
 ```bash
+cd ./TSFM
 python chronos_embeddings.py \
-    --model_path ./path/to/chronos-model \
-    --output_file ./results/predictions.txt \
-    --batch_size 8 \
-    --pooling mean
+    --output_file ./output.txt \
+    --model_path chronos-model-path \
+    --train_file DodgerLoopDay_TRAIN.ts \
+    --test_file DodgerLoopDay_TEST.ts
 ```
-Arguments:
-
-* --model_path: Path to Chronos model
-* --output_file: Path to save predictions (default: ./output/predictions.txt)
-* --batch_size: Batch size for embedding generation (default: 1)
-* --pooling: Embedding pooling strategy - 'mean' or 'first' (default: mean)
-
-
 
 ## Running ReasonTSC
 ```bash
