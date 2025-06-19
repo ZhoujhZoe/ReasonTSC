@@ -16,12 +16,12 @@ def parse_args():
     return parser.parse_args()
     
 # Task descriptions
-FIRST_ROUND_DESCRIPTION = '''
+FIRST_ROUND_DESCRIPTION = """
 Your task is to analyze and determine whether there are any highly pronounced and distinctly typical temporal patterns across these categories.
 Only if such patterns are exceptionally clear and consistently representative, mark it as 1; otherwise, mark it as 0.
-'''
+"""
 
-FIRST_ROUND_TASK = '''
+FIRST_ROUND_TASK = """
 ### Analysis Task\nCompare and summarize the significant differences in the time series patterns across categories based on the following characteristics.
 Break the series into meaningful segments (e.g. early, middle, late) if applicable. Only mark a characteristic as 1 if the differences are very clear and typical. Explicitly state if no differences are observed.
 ### Answer Format:\n- **Trend Differences**: 0/1. [Describe clear and typical trends (upward/downward) and how they differ across categories, or state if none are found.]
@@ -34,7 +34,7 @@ Break the series into meaningful segments (e.g. early, middle, late) if applicab
 - **Volatility Differences**: 0/1. [Describe clear and typical differences in variability or fluctuations, or state if none are found.]
 - **Structural Break Differences**: 0/1. [Identify clear and typical significant shifts or breaks in the time series, or state if none are found.]
 - **Mean Level Differences**: 0/1. [Identify clear and typical the average values across categories, or state if none are found.]
-'''
+"""
 
 def load_json(file_path):
     """Load JSON data from file"""

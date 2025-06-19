@@ -21,11 +21,11 @@
             ]
         },
         "model_accuracy":{
-            "moment_fullfinetune":"59.21%",
+            "moment":"59.21%",
             "chronos":"54.61%"
         },
         "model_samples":{
-            "moment_fullfinetune":{
+            "moment":{
                 "true_samples":[
                     {
                         "label":3,
@@ -101,11 +101,11 @@
             ]
         },
         "model_accuracy":{
-            "moment_fullfinetune":"72.59%",
+            "moment":"72.59%",
             "chronos":"53.33%"
         },
         "model_samples":{
-            "moment_fullfinetune":{
+            "moment":{
                 "true_samples":[
                     {
                         "label":2,
@@ -181,11 +181,11 @@
             ]
         },
         "model_accuracy":{
-            "moment_fullfinetune":"65.56%",
+            "moment":"65.56%",
             "chronos":"62.22%"
         },
         "model_samples":{
-            "moment_fullfinetune":{
+            "moment":{
                 "true_samples":[
                     {
                         "label":2,
@@ -279,11 +279,11 @@
             ]
         },
         "model_accuracy":{
-            "moment_fullfinetune":"48.89%",
+            "moment":"48.89%",
             "chronos":"42.22%"
         },
         "model_samples":{
-            "moment_fullfinetune":{
+            "moment":{
                 "true_samples":[
                     {
                         "label":5,
@@ -355,11 +355,11 @@
             ]
         },
         "model_accuracy":{
-            "moment_fullfinetune":"88.40%",
+            "moment":"88.40%",
             "chronos":"91.30%"
         },
         "model_samples":{
-            "moment_fullfinetune":{
+            "moment":{
                 "true_samples":[
                     {
                         "label":2,
@@ -445,11 +445,11 @@
             ]
         },
         "model_accuracy":{
-            "moment_fullfinetune":"88.48%",
+            "moment":"88.48%",
             "chronos":"64.07%"
         },
         "model_samples":{
-            "moment_fullfinetune":{
+            "moment":{
                 "true_samples":[
                     {
                         "label":7,

@@ -1,7 +1,7 @@
 # ReasonTSC
 ReasonTSC is a framework designed to effectively leverage LLM reasoning for time series classification through both a multi-turn reasoning and a fused decision-making strategy tailored to TSC.
 
-Our work is detailed in the paper *"Enhancing LLM Reasoning for Time Series Classification by Tailored Thinking and Fused Decision"* available on [arXiv](https://arxiv.org/pdf/2506.00807). The complete code for ReasonTSC is currently under optimization, and we will release the updated version soon.
+Our work is detailed in the paper *"Enhancing LLM Reasoning for Time Series Classification by Tailored Thinking and Fused Decision"* available on [arXiv](https://arxiv.org/pdf/2506.00807).
 
 To set up the environment
 ```bash
@@ -72,30 +72,77 @@ python chronos_embeddings.py \
 
 ## Running ReasonTSC 
 ```bash
-python main.py --config config.json
+cd ./ReasonTSC
+python main.py \
+  --config_file ./scripts/multi_prompt_UEA.json \
+  --subset_id 3 \
+  --specific_model chronos \ # Options: moment/chronos
+  --specific_model_output_file ./scripts/Chronos_LibrasDimension1.json \
+  --subset_sample_file ./scripts/LibrasDimension1_TEST.json \
+  --gpt_model gpt-4o-mini \
+  --output_file ./LibrasDimension1_gpt4o_chronos.json
 ```
-Arguments:
+**Arguments Explanation:**
+| Argument | Description |
+|----------|-------------|
+| `--config_file` | Path to JSON configuration file containing dataset and framework specifications |
+| `--subset_id` | Numeric identifier for the target dataset subset in config_file |
+| `--specific_model` | TSFM selection (`moment` or `chronos`) |
+| `--specific_model_output_file` | Path to plug-in TSFM results |
+| `--subset_sample_file` | Path to processed UCR/UEA dataset samples |
+| `--gpt_model` | LLM selection for ReasonTSC analysis |
+| `--output_file` | Path for saving LLM output results |
 
-* --config_file: Contains dataset and framework information
-* --subset_id: Matches the dataset ID in config_file
-* --specific_model: Choose between moment_fullfinetune or chronos
-* specific_model_output_file: Processed TSFM classification output
-* subset_sample_file: Processed UCR/UEA dataset
-* gpt_model: LLM selection for ReasonTSC
-* output_file: Path to save LLM output
-
-Analyze results:
+**Analyzing Results:**
 ```bash
-python analyze_results.py --input output.json
+python analyze_results.py \
+  --input_file ./LLM_outputs.json \
+  --output_file ./processed_LLM_outputs.json
 ```
 
-## TS Pattern Interpretation 
-### Interpreting pattens on synthetic data
 
-### Interpreting pattens on UCR/UEA Archive
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## TS Pattern Interpretation Study
+### Interpreting pattens on synthetic data
 ```bash
 cd ./Interpretation
+# Generate synthetic testing dataset
+python synthetic_generating.py \
+    --pattern_type pattern \
+    --output_file ./synthesis_trend.jsonl \
+    --num_significant 150 \
+    --num_non_significant 150 \
+    --length 80 \
+    --shuffle
+    
+# Convert to multiple-choice format
+python process_data.py \
+    --input_jsonl ./synthesis_trend.jsonl \
+    --output_json ./synthesis_trend.json
 
+# Run pattern interpretation
+python synthetic_interpretation.py \
+    --gpt_model gpt-4 \
+    --sample_file ./synthetic_dataset/synthesis_trend.json \
+    --output_file trend_results.json \
+    --prompt_type trend # Options: trend/frequency/amplitude/pattern
+```
+### Interpreting pattens on UCR/UEA Archive
+```bash
+# Run UCR/UEA pattern interpretation
 python real_interpretation.py \
     --config_file ../ReasonTSC/multi_prompt_UEA.json \
     --subset_id 4 \
@@ -103,6 +150,7 @@ python real_interpretation.py \
     --gpt_model gpt-4o-mini \
     --output_file ./output.json
 
+# Analysis LLM outputs
 python output_analysis.py \
     --input_file ./input_file.json \
     --output_file ./output_file.json

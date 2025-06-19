@@ -1,9 +1,0 @@
-{
-    "config_file": "./multi_prompt_UEA.json",
-    "subset_id": 3, 
-    "specific_model": "chronos",
-    "specific_model_output_file": "./Dataset/Chronos_EpilepsyDimension1.json",
-    "subset_sample_file": "./Dataset/EpilepsyDimension1_TEST.json",
-    "gpt_model": "gpt-4o-mini",
-    "output_file": "./output.json"
-}
