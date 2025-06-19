@@ -6,6 +6,7 @@ Our work is detailed in the paper *"Enhancing LLM Reasoning for Time Series Clas
 To set up the environment
 ```bash
 pip install -r requirements.txt
+export OPENAI_API_KEY='your-api-key-here'
 ```
 
 ## Data Preparation
@@ -69,7 +70,7 @@ python chronos_embeddings.py \
     --test_file DodgerLoopDay_TEST.ts
 ```
 
-## Running ReasonTSC
+## Running ReasonTSC 
 ```bash
 python main.py --config config.json
 ```
@@ -88,14 +89,23 @@ Analyze results:
 python analyze_results.py --input output.json
 ```
 
-## Interpretation
-UCR & UEA data interpretation
+## TS Pattern Interpretation 
+### Interpreting pattens on synthetic data
+
+### Interpreting pattens on UCR/UEA Archive
 ```bash
-python analyze.py \
-    --config ./multi_prompt_UEA.json \
+cd ./Interpretation
+
+python real_interpretation.py \
+    --config_file ../ReasonTSC/multi_prompt_UEA.json \
     --subset_id 4 \
-    --samples ./scripts/EpilepsyDimension1_category.json \
-    --model gpt-4o-mini \
-    --output ./results/PenDigitsDimension1_analysis.json
+    --subset_sample_file ./EpilepsyDimension1_category.json \
+    --gpt_model gpt-4o-mini \
+    --output_file ./output.json
+
+python output_analysis.py \
+    --input_file ./input_file.json \
+    --output_file ./output_file.json
 ```
+
 
