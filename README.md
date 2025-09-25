@@ -1,8 +1,6 @@
 # ReasonTSC
 ReasonTSC is a framework designed to effectively leverage LLM reasoning for time series classification through both a multi-turn reasoning and a fused decision-making strategy tailored to TSC.
 
-<!-- Our work is detailed in the paper *"Enhancing LLM Reasoning for Time Series Classification by Tailored Thinking and Fused Decision"* available on [arXiv](https://arxiv.org/pdf/2506.00807). -->
-
 To set up the environment
 ```bash
 pip install -r requirements.txt
